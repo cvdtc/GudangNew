@@ -1,6 +1,6 @@
-# GUDANGPROJECT
+# GUDANG PROJECT
 
-A new Flutter project.
+Aplikasi Gudang 
 
 ## Getting Started
 
