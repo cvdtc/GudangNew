@@ -140,7 +140,7 @@ class HomePage extends StatefulWidget {
                           child: Row(
                             children: <Widget>[
                               SvgPicture.asset(
-                                  'asset/',
+                                  'assets/svg/dummy/service_car_rental_icon.svg',
                               fit: BoxFit.contain,
                               ),
                               Padding(
@@ -149,8 +149,8 @@ class HomePage extends StatefulWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: <Widget>[
-                                    Text('40 Feet', style: mServiceTitleStyle,),
-                                    Text('Lihat selengkapnya...', style: mServiceSubtitleStyle,)
+                                    Text('Menu 1', style: mServiceTitleStyle,),
+                                    Text('See Details...', style: mServiceSubtitleStyle,)
                                   ],
                                 ),
                               )
@@ -171,7 +171,7 @@ class HomePage extends StatefulWidget {
                           child: Row(
                             children: <Widget>[
                               SvgPicture.asset(
-                                'asset/',
+                                'assets/svg/dummy/service_flight_icon.svg',
                                 fit: BoxFit.contain,
                               ),
                               Padding(
@@ -180,8 +180,8 @@ class HomePage extends StatefulWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: <Widget>[
-                                    Text('20 Feet', style: mServiceTitleStyle,),
-                                    Text('Lihat selengkapnya...', style: mServiceSubtitleStyle,)
+                                    Text('Menu 2', style: mServiceTitleStyle,),
+                                    Text('See Details...', style: mServiceSubtitleStyle,)
                                   ],
                                 ),
                               )
@@ -207,7 +207,7 @@ class HomePage extends StatefulWidget {
                           child: Row(
                             children: <Widget>[
                               SvgPicture.asset(
-                                'asset/',
+                                'assets/svg/dummy/service_train_icon.svg',
                                 fit: BoxFit.contain,
                               ),
                               Padding(
@@ -216,8 +216,8 @@ class HomePage extends StatefulWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: <Widget>[
-                                    Text('60 Feet', style: mServiceTitleStyle,),
-                                    Text('Lihat selengkapnya...', style: mServiceSubtitleStyle,)
+                                    Text('Menu 3', style: mServiceTitleStyle,),
+                                    Text('See Details...', style: mServiceSubtitleStyle,)
                                   ],
                                 ),
                               )
@@ -238,7 +238,7 @@ class HomePage extends StatefulWidget {
                           child: Row(
                             children: <Widget>[
                               SvgPicture.asset(
-                                'asset/',
+                                'assets/svg/dummy/service_hotel_icon.svg',
                                 fit: BoxFit.contain,
                               ),
                               Padding(
@@ -247,8 +247,8 @@ class HomePage extends StatefulWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: <Widget>[
-                                    Text('10 Feet', style: mServiceTitleStyle,),
-                                    Text('Lihat selengkapnya...', style: mServiceSubtitleStyle,)
+                                    Text('Menu 4', style: mServiceTitleStyle,),
+                                    Text('See Details...', style: mServiceSubtitleStyle,)
                                   ],
                                 ),
                               )
@@ -306,7 +306,7 @@ class HomePage extends StatefulWidget {
             Padding(
               padding: EdgeInsets.only(left: 16, top: 24, bottom: 10),
               child: Text(
-                'Container Log\'\s',
+                'Container News',
                 style: mTitleStyle,
               ),
             ),
