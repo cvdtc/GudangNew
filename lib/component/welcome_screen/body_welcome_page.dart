@@ -1,11 +1,12 @@
-import 'package:GUDANGPROJECT/component/background.dart';
+import 'package:GUDANGPROJECT/component/background_welcome_page.dart';
 import 'package:GUDANGPROJECT/component/rounded_button.dart';
 import 'package:GUDANGPROJECT/constant/constant_color.dart';
 import 'package:GUDANGPROJECT/screen/login_page.dart';
+import 'package:GUDANGPROJECT/screen/register_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class Body extends StatelessWidget {
+class BodyWelcomePage extends StatelessWidget {
 
 
   @override
@@ -41,7 +42,16 @@ class Body extends StatelessWidget {
             text: "REGISTRASI",
             color: primaryDarkColor,
             textColor: Colors.black,
-            press: (){},
+            press: (){
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context){
+                      return RegisterPage();
+                    },
+                  ),
+                );
+            },
           ),
         ],
     ),
