@@ -1,4 +1,0 @@
-#Wed May 27 09:30:55 ICT 2020
-base.0=D\:\\KERJA\\GUDANG\\GUDANGPROJECT\\GudangNew\\build\\app\\intermediates\\transforms\\r8\\release\\0\\classes.dex
-path.0=classes.dex
-renamed.0=classes.dex
