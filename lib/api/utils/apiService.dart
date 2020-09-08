@@ -22,7 +22,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 // - UBAH
 
 class ApiService {
-  final String baseUrl = "http://192.168.43.163:9992/api/";
+  final String baseUrl = "http://192.168.1.243:9992/api/";
 //  final String baseUrl = "http://35.229.217.130:9992/api/";
   Client client = Client();
   ResponseCode responseCode;

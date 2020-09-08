@@ -104,11 +104,12 @@ class _RegistrasiState extends State<RegistrasiPage> {
                                   _controllerNohp.clear();
                                   _controllerPassword.clear();
                                   _controllerPasswordRetype.clear();
-                                  _scaffoldState.currentState
-                                      .showSnackBar(SnackBar(
-                                    content: Text(
-                                        "${_apiService.responseCode.mMessage}"),
-                                  ));
+                                  showAlertDialog(context);
+                                  // _scaffoldState.currentState
+                                  //     .showSnackBar(SnackBar(
+                                  //   content: Text(
+                                  //       "${_apiService.responseCode.mMessage}"),
+                                  // ));
                                 } else {
                                   _scaffoldState.currentState
                                       .showSnackBar(SnackBar(
