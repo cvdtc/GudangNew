@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="182dc778-7a8c-46a9-8a33-1fe31e4c3d8c" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="182dc778-7a8c-46a9-8a33-1fe31e4c3d8c" name="Default Changelist" comment="" />
+      <created>1595658393001</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1595658393001</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="369" y="282" key="com.intellij.ide.util.TipDialog" timestamp="1595658450205">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="369" y="282" key="com.intellij.ide.util.TipDialog/0.0.1440.900@0.0.1440.900" timestamp="1595658450205" />
+  </component>
+</project>
