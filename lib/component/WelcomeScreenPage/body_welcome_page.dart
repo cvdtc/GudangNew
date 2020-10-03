@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:GUDANGPROJECT/api/utils/apiService.dart';
 import 'package:GUDANGPROJECT/component/LoginPage/Login.Validation.dart';
 import 'package:GUDANGPROJECT/component/WelcomeScreenPage/background_welcome_page.dart';
 import 'package:GUDANGPROJECT/widget/bottom_nav.dart';
@@ -8,7 +9,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class BodyWelcomePage extends StatefulWidget {
+class  BodyWelcomePage extends StatefulWidget {
   @override
   _BodyWelcomePageState createState() => _BodyWelcomePageState();
 }
@@ -16,29 +17,62 @@ class BodyWelcomePage extends StatefulWidget {
 class _BodyWelcomePageState extends State<BodyWelcomePage> {
   bool _showbutton = false;
   cekToken() async {
+    bool _isLoading = false;
+    ApiService _apiService = ApiService();
+    bool isSuccess = true;
+    // sp = await SharedPreferences.getInstance();
+    var token = "", newtoken = "", access_token = "", refresh_token = "";
     SharedPreferences sp = await SharedPreferences.getInstance();
-    var access_token = sp.getString("access_token");
+    access_token = sp.getString("access_token");
+    refresh_token = sp.getString("refresh_token");
     print("MASUK CEK TOKEN $access_token");
     //checking jika token kosong maka di arahkan ke menu login jika tidak akan meng-hold token dan refresh token
     if (access_token == null) {
-      setState(() {
-        _showbutton = true;
-      });
-    } else {
-      _showbutton = false;
+      print("access token null");
+      showAlertDialog(context);
       Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (BuildContext context) => Home()),
-          (Route<dynamic> route) => true);
+          MaterialPageRoute(builder: (BuildContext context) => LoginPage()),
+              (Route<dynamic> route) => true);
+    } else {
+      print("1");
+      _apiService.checkingToken(access_token).then((value) => setState(() {
+        print("2");
+        isSuccess = value;
+        //checking jika token expired/tidak berlaku maka akan di ambilkan dari refresh token
+        if (!isSuccess) {
+          print("3");
+          _apiService
+              .refreshToken(refresh_token)
+              .then((value) => setState(() {
+            var newtoken = value;
+            //setting access_token dari refresh_token
+            print("4");
+            if (newtoken != "") {
+              sp.setString("access_token", newtoken);
+              access_token = newtoken;
+              print("harusnya masuk dsbord");
+              Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(
+                      builder: (BuildContext context) => Home()),
+                      (Route<dynamic> route) => true);
+            } else {
+              showAlertDialog(context);
+              Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(
+                      builder: (BuildContext context) =>
+                          LoginPage()),
+                      (Route<dynamic> route) => true);
+            }
+          }));
+        }
+      }));
     }
   }
 
   @override
   void initState() {
+    super.initState();
     cekToken();
-    Timer(
-        Duration(seconds: 4),
-        () => Navigator.push(
-            context, MaterialPageRoute(builder: (context) => LoginPage())));
   }
 
   @override

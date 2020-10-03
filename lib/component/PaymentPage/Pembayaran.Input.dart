@@ -90,7 +90,6 @@ class _FormInputPembayaran extends State<FormInputPembayaran> {
     sp = await SharedPreferences.getInstance();
     access_token = sp.getString("access_token");
     refresh_token = sp.getString("refresh_token");
-    idcustomer = sp.getString("idcustomer");
     email = sp.getString("email");
     nama_customer = sp.getString("nama_customer");
     //checking jika token kosong maka di arahkan ke menu login jika tidak akan meng-hold token dan refresh token
@@ -166,7 +165,6 @@ class _FormInputPembayaran extends State<FormInputPembayaran> {
                     child: InkWell(
                       highlightColor: Colors.lightGreen,
                       onTap: () {
-                        print(payment.idpayment_gateway);
                         rgValue = payment.nama_provider;
                         rgID = payment.idpayment_gateway;
                       },
@@ -180,6 +178,20 @@ class _FormInputPembayaran extends State<FormInputPembayaran> {
                                 color: Colors.blueAccent,
                                 fontWeight: FontWeight.bold),
                           ),
+                          Row(
+                            children: <Widget>[
+                              Text(
+                                "Biaya Layanan : ",
+                                style:
+                                    TextStyle(fontSize: 14, color: Colors.grey),
+                              ),
+                              Text(
+                                "Rp. " + payment.nominal_biaya.toString(),
+                                style:
+                                    TextStyle(fontSize: 14, color: Colors.grey),
+                              ),
+                            ],
+                          )
                         ],
                       ),
                     ),
@@ -443,7 +455,6 @@ class _FormInputPembayaran extends State<FormInputPembayaran> {
                             idjenis_produk: idjenis_produk,
                             harga: double.parse(sharga.toString()),
                             total_harga: double.parse(stotal_harga.toString()),
-                            idcustomer: int.parse(idcustomer),
                             keterangan: keterangan.toString(),
                             jumlah_sewa: jumlah_sewa,
                             flagasuransi: 0,
@@ -457,7 +468,7 @@ class _FormInputPembayaran extends State<FormInputPembayaran> {
                             nominal_barang: double.parse(snominal_barang.toString()),
                             keterangan_barang: sketerangan_barang,
                             tanggal_akhir: stanggal_akhir);
-                        print("SONVAL_:" + orderProduk.toString());
+                        print("JSONVAL_:" + orderProduk.toString());
                         _apiService
                             .tambahOrderProduk(orderProduk)
                             .then((idorder) {

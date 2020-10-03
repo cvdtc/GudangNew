@@ -10,7 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:indonesia/indonesia.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:intl/intl.dart';
-import 'package:date_format/date_format.dart';
 import 'package:http/http.dart' as http;
 
 final GlobalKey<ScaffoldState> _scaffoldState = GlobalKey<ScaffoldState>();
@@ -53,7 +52,7 @@ class _FormDetailOrder extends State<FormInputOrder> {
     if (picked != null && picked != _date) {
       setState(() {
         _date = picked;
-        if(_date.isAfter(_date2)) _date2 = _date.add(new Duration(days:1));
+        if(_date.isAfter(_date2)) _date2 = _date.add(new Duration(days:3));
         pilihtanggal = new DateFormat("yyyy-MM-dd 00:00:00").format(_date);
         jumlah_sewas = DateTime.parse(pilihtanggal2)
             .difference(DateTime.parse(pilihtanggal))
@@ -74,7 +73,7 @@ class _FormDetailOrder extends State<FormInputOrder> {
     if (picked != null && picked != _date2) {
       setState(() {
         _date2 = picked;
-        if(_date2.isBefore(_date)) _date2 = _date.add(new Duration(days:1));
+        if(_date2.isBefore(_date)) _date2 = _date.add(new Duration(days:3));
         pilihtanggal2 = new DateFormat("yyyy-MM-dd 00:00:00").format(_date2);
         jumlah_sewas = DateTime.parse(pilihtanggal2)
             .difference(DateTime.parse(pilihtanggal))

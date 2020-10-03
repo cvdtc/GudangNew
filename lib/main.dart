@@ -1,3 +1,4 @@
+import 'package:GUDANGPROJECT/component/LoginPage/Login.Validation.dart';
 import 'package:GUDANGPROJECT/screen/welcome_page.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.grey[100],
       ),
       debugShowCheckedModeBanner: false,
-        home: WelcomePage(),
+        home: LoginPage(),
       );
   }
 }

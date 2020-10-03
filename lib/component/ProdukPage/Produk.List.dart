@@ -25,15 +25,18 @@ class _ProdukList extends State<ProdukList> {
     idcustomer = sp.getString("idcustomer");
     email = sp.getString("email");
     nama_customer = sp.getString("nama_customer");
+    print('CEKKKKKK'+access_token+" - "+refresh_token);
     //checking jika token kosong maka di arahkan ke menu login jika tidak akan meng-hold token dan refresh token
     if (access_token == null) {
       showAlertDialog(context);
+      print("CEK TOKEN BERHASIL : "+access_token+refresh_token);
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(builder: (BuildContext context) => LoginPage()),
           (Route<dynamic> route) => false);
     } else {
       _apiService.checkingToken(access_token).then((value) => setState(() {
             isSuccess = value;
+            print("Cek token : "+access_token+" issuccess : "+isSuccess.toString());
             //checking jika token expired/tidak berlaku maka akan di ambilkan dari refresh token
             if (!isSuccess) {
               _apiService
@@ -42,15 +45,17 @@ class _ProdukList extends State<ProdukList> {
                         var newtoken = value;
                         //setting access_token dari refresh_token
                         if (newtoken != "") {
+                          print("CEK TOKEN BERHASIL : "+access_token+" - "+refresh_token);
                           sp.setString("access_token", newtoken);
                           access_token = newtoken;
                         } else {
-                          showAlertDialog(context);
-                          Navigator.of(context).pushAndRemoveUntil(
-                              MaterialPageRoute(
-                                  builder: (BuildContext context) =>
-                                      LoginPage()),
-                              (Route<dynamic> route) => false);
+                          // showAlertDialog(context);
+                          print("TOKEN EXPIRED PRODUK : "+access_token+" - "+refresh_token);
+                          // Navigator.of(context).pushAndRemoveUntil(
+                          //     MaterialPageRoute(
+                          //         builder: (BuildContext context) =>
+                          //             LoginPage()),
+                          //     (Route<dynamic> route) => false);
                         }
                       }));
             }
@@ -146,7 +151,7 @@ class _ProdukList extends State<ProdukList> {
                   //   mainAxisAlignment: MainAxisAlignment.start,
                   child: InkWell(
                     onTap: () {
-                      if (idcustomer == "0") {
+                      if (nama_customer == "" || nama_customer == null || nama_customer == "0") {
                         Scaffold.of(context).showSnackBar(SnackBar(
                           content: Text(
                               'Anda Harus Melengkapi profile untuk melakukan transaksi!'),

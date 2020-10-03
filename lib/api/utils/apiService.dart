@@ -13,6 +13,7 @@ import 'package:GUDANGPROJECT/api/models/pin/pin.model.dart';
 import 'package:GUDANGPROJECT/api/models/responsecode/responcode.model.dart';
 import 'package:GUDANGPROJECT/api/models/token/token.model.dart';
 import 'package:GUDANGPROJECT/api/models/voucher/voucher.controller.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' show Client;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -35,7 +36,7 @@ class ApiService {
   Future<List<JenisProduk>> listJenisProduk(String token) async {
     final response = await client.get("$baseUrl/jenisprodukdanproduk",
         headers: {"Authorization": "BEARER ${token}"});
-//    print(response.body);
+   print("Api Service"+token);
     if (response.statusCode == 200) {
       return jenisprodukFromJson(response.body);
     } else {
@@ -291,6 +292,7 @@ class ApiService {
   Future<bool> checkingToken(String token) async {
     final response = await client.get("$baseUrl/ceklogin",
         headers: {"Authorization": "BEARER ${token}"});
+    print("Cekk Token : " + response.body);
     if (response.statusCode == 200) {
       return true;
     } else {
@@ -300,11 +302,14 @@ class ApiService {
 
 //  GET AND CHECKING REFRESH TOKEN
   Future<String> refreshToken(String token) async {
+    // print("api refresh token "+token);
     final response = await client.post(
       "$baseUrl/newtoken",
       headers: {"content-type": "application/json"},
       body: jsonEncode({"token": "${token}"}),
     );
+    print("refresh token code "+response.body);
+    // print("NEW Access TOken  "+json.decode(response.body)['access_token']);
     if (response.statusCode == 200) {
       return json.decode(response.body)['access_token'];
     } else {

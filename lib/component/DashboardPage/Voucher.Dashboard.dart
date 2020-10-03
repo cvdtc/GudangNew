@@ -116,7 +116,6 @@ class _VoucherDashboard extends State<VoucherDashboard> {
             layout: SwiperLayout.DEFAULT,
             itemBuilder: (BuildContext context, index) {
               Voucher voucher = dataIndex[index];
-              print("HASIL URL GAMBAR" + voucher.toString());
               return Container(
                 decoration: BoxDecoration(
                   // borderRadius: BorderRadius.circular(8),
@@ -128,7 +127,9 @@ class _VoucherDashboard extends State<VoucherDashboard> {
             itemCount: dataIndex.length,
           ),
         ),
-        SizedBox(height: 12,),
+        SizedBox(
+          height: 12,
+        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[

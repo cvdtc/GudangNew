@@ -10,9 +10,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 final GlobalKey<ScaffoldState> _scaffoldState = GlobalKey<ScaffoldState>();
 
 class TambahProfile extends StatefulWidget {
-  Customer customer;
-  TambahProfile({this.customer});
-
   @override
   _TambahProfileState createState() => _TambahProfileState();
 }
@@ -28,7 +25,7 @@ class _TambahProfileState extends State<TambahProfile> {
   String _nama,
       _alamat,
       _noKtp,
-      urlcomboKota = "http://35.229.217.130:9992/api/kota/",
+      urlcomboKota = "http://192.168.1.243:9992/api/kota/",
       valKota;
 
   TextEditingController _controllerNamaLengkap = TextEditingController();
@@ -40,14 +37,10 @@ class _TambahProfileState extends State<TambahProfile> {
   void getcomboKota() async {
     final response = await http.get(urlcomboKota,
         headers: {"Authorization": "BEARER ${access_token}"});
-    // final response = await http.get(urlcomboKota);
-    print("cek token" + access_token);
     var listdata = json.decode(response.body);
-    print("cek --" + response.body);
     setState(() {
       _dataKota = listdata;
     });
-    print("data : $_dataKota");
   }
 
   cekToken() async {
@@ -95,28 +88,28 @@ class _TambahProfileState extends State<TambahProfile> {
 
   @override
   void initState() {
-    if (widget.customer != null) {
-      _isFieldNamaLengkap = true;
-      _controllerNamaLengkap.text = widget.customer.nama_customer;
-
-      _isFieldNoKtp = true;
-      _controllerNoKtp.text = widget.customer.noktp;
-
-      _isFieldAlamat = true;
-      _controllerAlamat.text = widget.customer.alamat;
-    }
     super.initState();
     cekToken();
   }
 
   @override
   Widget build(BuildContext context) {
+
+    void Keluarr() async {
+      SharedPreferences preferences = await SharedPreferences.getInstance();
+      cekToken();
+      await preferences.clear();
+      if (preferences.getString("access_token") == null) {
+        print("SharePref berhasil di hapus");
+      }
+    }
+
     return Scaffold(
       key: _scaffoldState,
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.white),
         title: Text(
-          widget.customer == null ? "Form Add" : "Change Data",
+          "Masukkan data diri anda",
           style: TextStyle(color: Colors.white),
         ),
       ),
@@ -144,9 +137,7 @@ class _TambahProfileState extends State<TambahProfile> {
                   padding: const EdgeInsets.only(top: 8.0),
                   child: RaisedButton(
                     child: Text(
-                      widget.customer == null
-                          ? "Submit".toUpperCase()
-                          : "Update Data".toUpperCase(),
+                      "Simpan",
                       style: TextStyle(color: Colors.white),
                     ),
                     onPressed: () {
@@ -158,16 +149,12 @@ class _TambahProfileState extends State<TambahProfile> {
                           !_isFieldNoKtp) {
                         _scaffoldState.currentState.showSnackBar(
                           SnackBar(
-                            content: Text("Please fill all field"),
+                            content: Text("Kolom Tidak Boleh Kosong"),
                           ),
                         );
                         return;
                       }
                       setState(() => _isLoading = true);
-                      // String nama = _controllerNamaLengkap.text.toString();
-                      // String noKtp = _controllerNoKtp.text.toString();
-                      // String alamat = _controllerAlamat.text.toString();
-
                       Customer customer = Customer(
                         nama_customer: _controllerNamaLengkap.text.toString(),
                         noktp: _controllerNoKtp.text.toString(),
@@ -176,30 +163,16 @@ class _TambahProfileState extends State<TambahProfile> {
                         blacklist: "0",
                         idkota: int.parse(valKota),
                       );
-                      if (widget.customer == null) {
-                        _apiService.TambahCustomer(customer).then((isSuccess) {
-                          setState(() => _isLoading = false);
-                          if (isSuccess) {
-                            Navigator.pop(_scaffoldState.currentState.context);
-                          } else {
-                            _scaffoldState.currentState.showSnackBar(SnackBar(
-                              content: Text("Submit data failed"),
-                            ));
-                          }
-                        });
-                      } else {
-                        customer.token = widget.customer.token;
-                        _apiService.UpdateCustomer(customer).then((isSuccess) {
-                          setState(() => _isLoading = false);
-                          if (isSuccess) {
-                            Navigator.pop(_scaffoldState.currentState.context);
-                          } else {
-                            _scaffoldState.currentState.showSnackBar(SnackBar(
-                              content: Text("Update data failed"),
-                            ));
-                          }
-                        });
-                      }
+                      _apiService.TambahCustomer(customer).then((isSuccess) {
+                        setState(() => _isLoading = false);
+                        if (isSuccess) {
+                          Keluarr();
+                        } else {
+                          _scaffoldState.currentState.showSnackBar(SnackBar(
+                            content: Text("Data Gagal Disimpan"),
+                          ));
+                        }
+                      });
                     },
                     color: Colors.orange[600],
                   ),
@@ -207,22 +180,6 @@ class _TambahProfileState extends State<TambahProfile> {
               ],
             ),
           ),
-          _isLoading
-              ? Stack(
-                  children: <Widget>[
-                    Opacity(
-                      opacity: 0.3,
-                      child: ModalBarrier(
-                        dismissible: false,
-                        color: Colors.grey,
-                      ),
-                    ),
-                    Center(
-                      child: CircularProgressIndicator(),
-                    )
-                  ],
-                )
-              : Container(),
         ],
       ),
     );

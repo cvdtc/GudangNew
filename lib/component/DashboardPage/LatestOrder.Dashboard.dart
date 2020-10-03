@@ -37,6 +37,7 @@ class _LatestOrderDashboardState extends State<LatestOrderDashboard> {
     idcustomer = sp.getString("idcustomer");
     email = sp.getString("email");
     nama_customer = sp.getString("nama_customer");
+
     // //checking jika token kosong maka di arahkan ke menu login jika tidak akan meng-hold token dan refresh token
     if (access_token == null) {
       showAlertDialog(context);
@@ -110,13 +111,15 @@ class _LatestOrderDashboardState extends State<LatestOrderDashboard> {
     return Container(
       // padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
       // height: MediaQuery.of(context).size.height * 0.35,
-
       height: 160,
       margin: EdgeInsets.only(left: 16, right: 16),
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: 3,
         itemBuilder: (context, index) {
+          if ( index == 0) {
+            print('masuk kosong');
+          } else {
           MystorageModel mystorageModel = dataIndex[index];
           return GestureDetector(
               onTap: () {
@@ -184,6 +187,7 @@ class _LatestOrderDashboardState extends State<LatestOrderDashboard> {
                   ),
                 ),
               ));
+          }
         },
       ),
     );

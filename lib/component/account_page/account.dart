@@ -32,9 +32,7 @@ class _AccountState extends State<Account> {
     refresh_token = sp.getString("refresh_token");
     idcustomer = sp.getString("idcustomer");
     nama_customer = sp.getString("nama_customer");
-    idpengguna = sp.getString("idpengguna");
     email = sp.getString("email");
-    print("Sharepref $access_token");
     //checking jika token kosong maka di arahkan ke menu login jika tidak akan meng-hold token dan refresh token
     if (access_token == null) {
       showAlertDialog(context);
@@ -76,11 +74,6 @@ class _AccountState extends State<Account> {
 
   @override
   Widget build(BuildContext context) {
-    // if (idcustomer == 0) {
-    //   routing = Navigator.push(context, MaterialPageRoute(builder: (context) => Account()));
-    // } else {
-    // routing = Navigator.push(context, MaterialPageRoute(builder: (context) => Account()));
-    // }
     void Keluarr() async {
       SharedPreferences preferences = await SharedPreferences.getInstance();
       cekToken();
@@ -89,7 +82,6 @@ class _AccountState extends State<Account> {
         print("SharePref berhasil di hapus");
       }
     }
-
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.transparent,
@@ -150,12 +142,17 @@ class _AccountState extends State<Account> {
             
             ListTile(
               leading: Icon(Icons.person),
-              title: Text("Ubah Profile"),
+              title: Text("Lengkapi Profile"),
               trailing: Icon(Icons.keyboard_arrow_right),
               //onTap: () {routing();}),
               onTap:(){
-                Navigator.push(context,
-                MaterialPageRoute(builder: (context) => UbahProfile()));
+                if(nama_customer == "0"){
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => TambahProfile()));
+                }else{
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => UbahProfile()));
+                }
               },
             ),
             ListTile(
@@ -184,15 +181,7 @@ class _AccountState extends State<Account> {
               leading: Icon(Icons.event_note),
               title: Text("Syarat dan Ketentuan"),
               trailing: Icon(Icons.keyboard_arrow_right),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        // builder: (context) => SyaratDanKetentuan()));
-                        builder: (context) => WelcomePage()));
-                        print("MASUK PAK EKO $access_token");
-                // UbahProfile();
-              },
+              onTap: () {},
             ),
             ListTile(
               leading: Icon(Icons.loop),

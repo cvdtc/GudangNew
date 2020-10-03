@@ -111,12 +111,14 @@ class _HomePageState extends State<HomePage> {
                           sp.setString("access_token", newtoken);
                           access_token = newtoken;
                         } else {
-                          showAlertDialog(context);
-                          Navigator.of(context).pushAndRemoveUntil(
-                              MaterialPageRoute(
-                                  builder: (BuildContext context) =>
-                                      LoginPage()),
-                              (Route<dynamic> route) => false);
+                          print("TOKEN EXPIRED HOMEPAGE : "+access_token+refresh_token);
+
+                          // showAlertDialog(context);
+                          // Navigator.of(context).pushAndRemoveUntil(
+                          //     MaterialPageRoute(
+                          //         builder: (BuildContext context) =>
+                          //             LoginPage()),
+                          //     (Route<dynamic> route) => false);
                         }
                       }));
             }
